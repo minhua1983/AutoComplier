@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoComplier.UI", "AutoComplier.UI\AutoComplier.UI.csproj", "{D515B21C-0AB1-4CA6-B3FA-FA9E9F39D40D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoComplier.Core", "AutoComplier.Core\AutoComplier.Core.csproj", "{A9E3EB77-A70E-4C36-AAC6-0B3A179FDA88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoComplier.XCore", "AutoComplier.XCore\AutoComplier.XCore.csproj", "{8679F561-7076-42CF-923E-6FED3F731E44}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D515B21C-0AB1-4CA6-B3FA-FA9E9F39D40D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D515B21C-0AB1-4CA6-B3FA-FA9E9F39D40D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D515B21C-0AB1-4CA6-B3FA-FA9E9F39D40D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D515B21C-0AB1-4CA6-B3FA-FA9E9F39D40D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9E3EB77-A70E-4C36-AAC6-0B3A179FDA88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9E3EB77-A70E-4C36-AAC6-0B3A179FDA88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9E3EB77-A70E-4C36-AAC6-0B3A179FDA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9E3EB77-A70E-4C36-AAC6-0B3A179FDA88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8679F561-7076-42CF-923E-6FED3F731E44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8679F561-7076-42CF-923E-6FED3F731E44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8679F561-7076-42CF-923E-6FED3F731E44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8679F561-7076-42CF-923E-6FED3F731E44}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

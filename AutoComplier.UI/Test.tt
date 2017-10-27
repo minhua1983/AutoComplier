@@ -1,0 +1,53 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Web" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+
+<# //Uncomment this line to test that the host allows the engine to set the extension. #>  
+<# //@ output extension=".htm" #>  
+
+<# //Uncomment this line if you want to debug the generated transformation class. #>  
+<# //System.Diagnostics.Debugger.Break(); #>  
+
+<# for (int i=0; i<3; i++)  
+   {  
+       //WriteLine("This is a test");  
+	   using(StreamWriter sw = new StreamWriter(@"D:\minhua\workspace\AutoComplier\AutoComplier.UI\Handler"+i+".ashx"))
+       {
+			sw.Write(@"<%@ WebHandler Language=""C#"" Class=""AutoComplier.UI.Handler"+i+@""" %>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace AutoComplier.UI
+{
+    /// <summary>
+    /// Handler1 的摘要说明
+    /// </summary>
+    public class Handler"+i+@" : IHttpHandler
+    {
+
+        public void ProcessRequest(HttpContext context)
+        {
+            context.Response.ContentType = ""text/plain"";
+            context.Response.Write(""Hello World "+i+@""");
+        }
+
+        public bool IsReusable
+        {
+            get
+            {
+                return false;
+            }
+        }
+    }
+}
+		   
+		   ");
+	   }
+   }   
+#> 
