@@ -1,16 +1,60 @@
-﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Web" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".txt" #>
+<#@ include file="EF.Utility.CS.ttinclude"#>
+<#@ Assembly name="$(projectDir)\bin\AutoComplier.UI.dll" #>
 
-<# //Uncomment this line to test that the host allows the engine to set the extension. #>  
-<# //@ output extension=".htm" #>  
+<# 
 
-<# //Uncomment this line if you want to debug the generated transformation class. #>  
-<# //System.Diagnostics.Debugger.Break(); #>  
+//获取解决方案所在目录
+var solutionDir = Host.ResolveAssemblyReference("$(SolutionDir)");
+//获取解决方案名称
+var solutionName = new DirectoryInfo(solutionDir).Name;
+//获取项目所在目录
+var projectDir = Host.ResolveAssemblyReference("$(ProjectDir)");
+
+CodeGenerationTools code = new CodeGenerationTools(this);
+MetadataLoader loader = new MetadataLoader(this);
+CodeRegion region = new CodeRegion(this, 1);
+MetadataTools ef = new MetadataTools(this);
+
+string inputFile = projectDir + @"\Model1.edmx";
+
+EdmItemCollection ItemCollection = loader.CreateEdmItemCollection(inputFile);
+string namespaceName = code.VsNamespaceSuggestion();
+
+EntityFrameworkTemplateFileManager fileManager = EntityFrameworkTemplateFileManager.Create(this);
+
+foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e => e.Name))
+{
+	Assembly assembly =Assembly.GetAssembly(typeof(AutoComplier.UI.Global));
+	var types = assembly.GetTypes();
+	foreach (var type in types)
+	{
+		if (type.Name == entity.Name)
+		{
+			#>
+			<#=type.Name#>
+			<#
+			var ps = type.GetProperties();
+			foreach (PropertyInfo propertyInfo in ps)
+			{
+				if(!propertyInfo.GetGetMethod().IsVirtual)
+                {
+					#>
+					<#=propertyInfo.Name#>
+					<#
+                }
+			}
+		}
+	}
+}
+#>
+
 
 <# for (int i=0; i<3; i++)  
    {  

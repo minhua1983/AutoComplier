@@ -1,8 +1,21 @@
 ﻿
-  
-  
 
-  
-  
+			Article
+								Id
+										SectionId
+										Title
+										CreateDate
+										Amount
+										Cost
+										IsDeleted
+								Section
+								Id
+										Title
+										CreateDate
+								User
+								Id
+										UserName
+										CreateDate
+					
 
  
