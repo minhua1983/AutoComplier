@@ -1,0 +1,40 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Web" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="AutoComplier.UI" #>
+<#@ import namespace="AutoComplier.UI.Common" #>
+<#@ import namespace="AutoComplier.UI.Models.Base" #>
+<#@ output extension=".cs" #>
+
+<#@ Assembly name="D:\minhua\workspace\AutoComplier\AutoComplier.UI\bin\AutoComplier.UI.dll" #>
+<# 
+List<Table> tableList = TableHelper.List(new Server{
+	IP = "DIY-PC",
+	User = "sa",
+	Pass = "Alpha2Bravo",
+	DefaultDatabase = "Demo"
+});
+#>using System;
+
+namespace AutoComplier.UI.Models
+{
+<#
+tableList.ForEach(table => {
+#>
+	public class <#=table.Name#>
+	{
+<#
+		table.ColumnList.ForEach(column => {
+#>
+		public <#=ColumnHelper.ConvertToMetaTypeString(column.Type)#> <#=column.Name#>{ get;set; }
+<#
+		});
+#>
+	}
+<#
+});   
+#> 
+}

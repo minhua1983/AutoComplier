@@ -1,0 +1,46 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="AutoComplier.UI" #>
+<#@ import namespace="AutoComplier.UI.Common" #>
+<#@ import namespace="AutoComplier.UI.Models.Base" #>
+<#@ output extension=".cs" #>
+
+<#@ Assembly name="D:\minhua\workspace\AutoComplier\AutoComplier.UI\bin\AutoComplier.UI.dll" #>
+<# 
+List<Table> tableList = TableHelper.List(new Server{
+	IP = "DIY-PC",
+	User = "sa",
+	Pass = "Alpha2Bravo",
+	DefaultDatabase = "demo"
+});
+#>
+using System;
+using System.Collections.Generic;
+using AutoComplier.UI.Repositories;
+using AutoComplier.UI.Models;
+
+namespace AutoComplier.UI.Services
+{
+<#
+tableList.ForEach(table => {
+#>
+	public partial class <#=table.Name#>Service
+	{
+		<#=table.Name#>Repository repository = new <#=table.Name#>Repository();
+
+		public List<<#=table.Name#>> List()
+		{
+			return repository.List();
+		}
+
+		public <#=table.Name#> Insert(<#=table.Name#> model)
+		{
+			return repository.Insert(model);
+		}
+	}
+<#
+});
+#>
+}

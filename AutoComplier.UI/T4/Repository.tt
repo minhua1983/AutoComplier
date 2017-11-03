@@ -1,0 +1,83 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="AutoComplier.UI" #>
+<#@ import namespace="AutoComplier.UI.Common" #>
+<#@ import namespace="AutoComplier.UI.Models.Base" #>
+<#@ output extension=".cs" #>
+
+<#@ Assembly name="D:\minhua\workspace\AutoComplier\AutoComplier.UI\bin\AutoComplier.UI.dll" #>
+<# 
+List<Table> tableList = TableHelper.List(new Server{
+	IP = "DIY-PC",
+	User = "sa",
+	Pass = "Alpha2Bravo",
+	DefaultDatabase = "Demo"
+});
+#>
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Linq;
+using Dapper;
+using AutoComplier.UI.Models;
+
+namespace AutoComplier.UI.Repositories
+{
+<#
+tableList.ForEach(table => {
+#>
+	public partial class <#=table.Name#>Repository
+	{
+		string connectionString = ConfigurationManager.AppSettings["demo"];
+
+		public List<<#=table.Name#>> List()
+		{
+			List<<#=table.Name#>> result;
+			using(IDbConnection conn = new SqlConnection(connectionString))
+			{
+				result = conn.Query<<#=table.Name#>>("SELECT * FROM <#=table.Name#>").AsList();
+			}
+			return result;
+		}
+
+		public <#=table.Name#> Detail(int id)
+		{
+			<#=table.Name#> result;
+			using(IDbConnection conn = new SqlConnection(connectionString))
+			{
+				result = conn.Query<<#=table.Name#>>("SELECT * FROM <#=table.Name#> WHERE id=@id",new { id = id }).FirstOrDefault();
+			}
+			return result;
+		}
+
+		public <#=table.Name#> Insert(<#=table.Name#> model)
+		{
+			
+			<#=table.Name#> result;
+			using(IDbConnection conn = new SqlConnection(connectionString))
+			{
+<#
+	StringBuilder sb = new StringBuilder();
+	table.ColumnList.ForEach(column => {
+		if(!column.IsPrimaryKey && !column.IsIdentity)
+		{
+			sb.Append(",ISNULL(@" + column.Name + "," + column.DefaultValue + ")");
+        }
+	});
+	string values = sb.ToString().Substring(1, sb.Length - 1);
+#>
+				object identity = conn.ExecuteScalar<<#=table.Name#>>("INSERT INTO <#=table.Name#> VALUES(<#=values#>);SELECT SCOPE_IDENTITY();", model);
+				int id = int.Parse(identity.ToString());
+				result = Detail(id);
+			}
+			return result;
+		}
+	}
+<#
+});
+#>
+}

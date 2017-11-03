@@ -9,24 +9,20 @@ using System.Data.SqlClient;
 using System.Web;
 using Dapper;
 using AutoComplier.UI.Models.Base;
+using AutoComplier.UI.Common;
 
 namespace AutoComplier.UI.Controllers
 {
-    public class ServerController : ApiController
+    public class TestController : ApiController
     {
         [HttpPost]
-        public ApiResponse Connect(Server server)
+        public ApiResponse Initialize(Server server)
         {
             ApiResponse apiResponse = new ApiResponse();
-            string connectionString = string.Format(@"server={0};uid={1};pwd={2};database=master;", server.IP, server.User, server.Pass);
+
             try
             {
-                using (IDbConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-                    HttpRuntime.Cache.Add("Server", server, null, DateTime.Now.AddSeconds(1200), System.Web.Caching.Cache.NoSlidingExpiration,System.Web.Caching.CacheItemPriority.Normal,null);
-                    conn.Close();
-                }
+                apiResponse.Result = TableHelper.List(server);
             }
             catch (Exception ex)
             {

@@ -7,8 +7,7 @@ namespace AutoComplier.UI.Models.Base
 {
     public class Table
     {
-        public string Schema { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
+        public List<Column> ColumnList { get; set; }
     }
 }

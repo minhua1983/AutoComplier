@@ -36,26 +36,44 @@ namespace AutoComplier.Core
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string templateFileName = @"D:\minhua\workspace\AutoComplier\AutoComplier.UI\Test.tt";
+            string[] files = new string[] {
+                //@"D:\minhua\workspace\AutoComplier\AutoComplier.UI\T4\Test.tt",
+                @"D:\minhua\workspace\AutoComplier\AutoComplier.UI\T4\Model.tt",
+                @"D:\minhua\workspace\AutoComplier\AutoComplier.UI\T4\Repository.tt",
+                @"D:\minhua\workspace\AutoComplier\AutoComplier.UI\T4\Service.tt",
+                @"D:\minhua\workspace\AutoComplier\AutoComplier.UI\T4\Controller.tt"
+            };
 
-            CustomCmdLineHost host = new CustomCmdLineHost();
-            Engine engine = new Engine();
-            host.TemplateFileValue = templateFileName;
-            string input = File.ReadAllText(templateFileName);
+            //MessageBox.Show(System.Environment.CurrentDirectory);
 
-
-
-            string output = engine.ProcessTemplate(input, host);
-            MessageBox.Show(output);
-
-
-            foreach (CompilerError error in host.Errors)
+            files.ToList().ForEach(file =>
             {
-                MessageBox.Show(error.ToString());
-            }
+                CustomCmdLineHost host = new CustomCmdLineHost();
+                Engine engine = new Engine();
+                host.TemplateFileValue = file;
+                string input = File.ReadAllText(file);
 
+                string output = engine.ProcessTemplate(input, host);
+                //MessageBox.Show(output);
+
+                foreach (CompilerError error in host.Errors)
+                {
+                    MessageBox.Show(error.ToString());
+                }
+            });
+
+            //*最大化，且不会自动关闭
+            string cmd = toolPathTextBox.Text + " " + filePathTextBox.Text + " " + parameterTextBox.Text;
+            cmd += " \n pause";
+            ProcessStartInfo ps = new ProcessStartInfo();
+            ps.WindowStyle = ProcessWindowStyle.Maximized;
+            ps.FileName = "cmd.exe";
+            ps.Arguments = "/K " + cmd + @"
+            pause";
+            Process.Start(ps);
+            //*/
             //启动MSBuild.exe
-            Process.Start(toolPathTextBox.Text, filePathTextBox.Text + " " + parameterTextBox.Text);
+            //Process.Start(toolPathTextBox.Text, filePathTextBox.Text +@" " + parameterTextBox.Text);
         }
     }
 }

@@ -9,5 +9,6 @@ namespace AutoComplier.UI.Models.Base
     {
         public int Code { get; set; }
         public string Message { get; set; }
+        public dynamic Result { get; set; }
     }
 }

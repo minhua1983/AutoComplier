@@ -12,10 +12,10 @@ using AutoComplier.UI.Models.Base;
 
 namespace AutoComplier.UI.Controllers
 {
-    public class ServerController : ApiController
+    public class DatabaseController : ApiController
     {
         [HttpPost]
-        public ApiResponse Connect(Server server)
+        public ApiResponse List(Server server)
         {
             ApiResponse apiResponse = new ApiResponse();
             string connectionString = string.Format(@"server={0};uid={1};pwd={2};database=master;", server.IP, server.User, server.Pass);
@@ -24,7 +24,9 @@ namespace AutoComplier.UI.Controllers
                 using (IDbConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    HttpRuntime.Cache.Add("Server", server, null, DateTime.Now.AddSeconds(1200), System.Web.Caching.Cache.NoSlidingExpiration,System.Web.Caching.CacheItemPriority.Normal,null);
+                    List<Database> databaseList = conn.Query<Database>("SELECT name FROM sys.databases").ToList();
+                    apiResponse.Result = databaseList;
+                    HttpRuntime.Cache.Add("DatabaseList", databaseList, null, DateTime.Now.AddSeconds(1200), System.Web.Caching.Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.Normal, null);
                     conn.Close();
                 }
             }
@@ -33,7 +35,6 @@ namespace AutoComplier.UI.Controllers
                 apiResponse.Code = 1;
                 apiResponse.Message = ex.Message;
             }
-
             return apiResponse;
         }
     }
