@@ -40,6 +40,7 @@
             this.toolPathOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolPathSelectLabel = new System.Windows.Forms.Label();
             this.filePathOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.resultLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tableNameLabel
@@ -131,11 +132,21 @@
             // 
             this.filePathOpenFileDialog.FileName = "filePathOpenFileDialog";
             // 
+            // resultLabel
+            // 
+            this.resultLabel.AutoSize = true;
+            this.resultLabel.Location = new System.Drawing.Point(154, 232);
+            this.resultLabel.Name = "resultLabel";
+            this.resultLabel.Size = new System.Drawing.Size(53, 12);
+            this.resultLabel.TabIndex = 10;
+            this.resultLabel.Text = "生成状态";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 262);
+            this.Controls.Add(this.resultLabel);
             this.Controls.Add(this.toolPathSelectLabel);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.parameterTextBox);
@@ -165,6 +176,7 @@
         private System.Windows.Forms.OpenFileDialog toolPathOpenFileDialog;
         private System.Windows.Forms.Label toolPathSelectLabel;
         private System.Windows.Forms.OpenFileDialog filePathOpenFileDialog;
+        private System.Windows.Forms.Label resultLabel;
     }
 }
 

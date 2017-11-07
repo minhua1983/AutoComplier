@@ -191,6 +191,7 @@
     <Compile Include="Models\Base\ApiResponse.cs" />
     <Compile Include="Models\Base\Column.cs" />
     <Compile Include="Models\Base\Database.cs" />
+    <Compile Include="Models\Base\Page.cs" />
     <Compile Include="Models\Base\Server.cs" />
     <Compile Include="Models\Base\Table.cs" />
     <Compile Include="Models\Request\ColumnListRequest.cs" />

@@ -120,11 +120,10 @@
   <data name="parameterTextBox.Text" xml:space="preserve">
     <value>/t:Rebuild /t:_CopyWebApplication /p:Configuration=Release;platform=x64;UseWPP_CopyWebApplication=True;PipelineDependsOnBuild=false /p:TargetFrameworkVersion=v4.5 /p:WebProjectOutputDir=D:\AutoComplier.Publish /p:OutputPath=D:\AutoComplier.Publish\bin;VisualStudioVersion=14.0</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="toolPathOpenFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <metadata name="toolPathOpenFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </data>
-  <data name="filePathOpenFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="filePathOpenFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>210, 17</value>
-  </data>
+  </metadata>
 </root>

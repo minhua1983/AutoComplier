@@ -27,8 +27,15 @@ using AutoComplier.UI.Models;
 
 namespace AutoComplier.UI.Repositories
 {
+	//生成时间：<#=DateTime.Now.ToString()#>
 <#
+
+
 tableList.ForEach(table => {
+	string primaryKey = string.Empty;
+	table.ColumnList.ForEach(column => {
+		if(column.IsPrimaryKey) primaryKey = column.Name;
+	});
 #>
 	public partial class <#=table.Name#>Repository
 	{
@@ -39,17 +46,17 @@ tableList.ForEach(table => {
 			List<<#=table.Name#>> result;
 			using(IDbConnection conn = new SqlConnection(connectionString))
 			{
-				result = conn.Query<<#=table.Name#>>("SELECT * FROM <#=table.Name#>").AsList();
+				result = conn.Query<<#=table.Name#>>("SELECT * FROM [<#=table.Name#>]").AsList();
 			}
 			return result;
 		}
 
-		public <#=table.Name#> Detail(int id)
+		public <#=table.Name#> Detail(int identity)
 		{
 			<#=table.Name#> result;
 			using(IDbConnection conn = new SqlConnection(connectionString))
 			{
-				result = conn.Query<<#=table.Name#>>("SELECT * FROM <#=table.Name#> WHERE id=@id",new { id = id }).FirstOrDefault();
+				result = conn.Query<<#=table.Name#>>("SELECT * FROM [<#=table.Name#>] WHERE [<#=primaryKey#>] = @<#=primaryKey#>",new { <#=primaryKey#> = identity }).FirstOrDefault();
 			}
 			return result;
 		}
@@ -61,20 +68,55 @@ tableList.ForEach(table => {
 			using(IDbConnection conn = new SqlConnection(connectionString))
 			{
 <#
-	StringBuilder sb = new StringBuilder();
+	StringBuilder sbValuesInsert = new StringBuilder();
+	StringBuilder sbColumnsInsert = new StringBuilder();
 	table.ColumnList.ForEach(column => {
-		if(!column.IsPrimaryKey && !column.IsIdentity)
+		if(column.IsPrimaryKey) primaryKey = column.Name;
+		if(!column.IsPrimaryKey && !column.IsIdentity && column.Type != "timestamp")
 		{
-			sb.Append(",ISNULL(@" + column.Name + "," + column.DefaultValue + ")");
+			sbValuesInsert.Append(",@" + column.Name);
+			sbColumnsInsert.Append(",[" + column.Name + "]");
         }
 	});
-	string values = sb.ToString().Substring(1, sb.Length - 1);
+	
+	string valuesInsert = sbValuesInsert.ToString().Substring(1, sbValuesInsert.Length - 1);
+	string columnsInsert =sbColumnsInsert.ToString().Substring(1, sbColumnsInsert.Length - 1);
 #>
-				object identity = conn.ExecuteScalar<<#=table.Name#>>("INSERT INTO <#=table.Name#> VALUES(<#=values#>);SELECT SCOPE_IDENTITY();", model);
-				int id = int.Parse(identity.ToString());
-				result = Detail(id);
+				object identityColumn = conn.ExecuteScalar("INSERT INTO [<#=table.Name#>](<#=columnsInsert#>) VALUES(<#=valuesInsert#>);SELECT SCOPE_IDENTITY();", model);
+				int identity = int.Parse(identityColumn.ToString());
+				result = Detail(identity);
 			}
 			return result;
+		}
+
+		public <#=table.Name#> Update(<#=table.Name#> model)
+		{
+			
+			<#=table.Name#> result;
+			using(IDbConnection conn = new SqlConnection(connectionString))
+			{
+<#
+	StringBuilder sbUpdate = new StringBuilder();
+	table.ColumnList.ForEach(column => {
+		if(!column.IsPrimaryKey && !column.IsIdentity && column.Type != "timestamp")
+		{
+			sbUpdate.Append(",[" + column.Name + "] = ISNULL(@" + column.Name+",[" + column.Name + "])");
+        }
+	});
+	string setUpdate = sbUpdate.ToString().Substring(1, sbUpdate.Length - 1);
+#>
+				conn.Execute("UPDATE [<#=table.Name#>] SET <#=setUpdate#> WHERE [<#=primaryKey#>] = @<#=primaryKey#>", model);
+				result = Detail(model.<#=primaryKey#>.Value);
+			}
+			return result;
+		}
+
+		public void Delete(int identity)
+		{
+			using(IDbConnection conn = new SqlConnection(connectionString))
+			{
+				conn.Execute("DELETE FROM [<#=table.Name#>] WHERE [<#=primaryKey#>] = @<#=primaryKey#>", new { <#=primaryKey#> = identity });
+			}
 		}
 	}
 <#

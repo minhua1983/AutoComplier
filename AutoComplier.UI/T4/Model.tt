@@ -21,6 +21,7 @@ List<Table> tableList = TableHelper.List(new Server{
 
 namespace AutoComplier.UI.Models
 {
+	//生成时间：<#=DateTime.Now.ToString()#>
 <#
 tableList.ForEach(table => {
 #>

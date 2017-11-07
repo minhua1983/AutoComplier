@@ -57,7 +57,7 @@ namespace AutoComplier.UI.Common
                     dbType = DbType.Int64;
                     break;
                 case "binary":
-                    dbType = DbType.Binary;
+                    dbType = DbType.String;
                     break;
                 case "char":
                     dbType = DbType.String;
@@ -77,9 +77,9 @@ namespace AutoComplier.UI.Common
                 //case "sql_variant":
                 //    dbType = SqlDbType.Variant;
                 //    break;
-                //case "timestamp":
-                //    dbType = DbType.Timestamp;
-                //    break;
+                case "timestamp":
+                    dbType = DbType.Byte;
+                    break;
                 //case "tinyint":
                 //    dbType = SqlDbType.TinyInt;
                 //    break;
@@ -94,6 +94,7 @@ namespace AutoComplier.UI.Common
                     break;
             }
             if (dbType == DbType.String) return dbType.ToString();
+            if (dbType == DbType.Byte) return "object";
             return @"Nullable<" + dbType.ToString() + ">";
         }
     }

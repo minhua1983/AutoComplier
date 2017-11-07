@@ -36,6 +36,8 @@ namespace AutoComplier.Core
 
         private void button1_Click(object sender, EventArgs e)
         {
+            resultLabel.Text = "代码生成中...";
+
             string[] files = new string[] {
                 //@"D:\minhua\workspace\AutoComplier\AutoComplier.UI\T4\Test.tt",
                 @"D:\minhua\workspace\AutoComplier\AutoComplier.UI\T4\Model.tt",
@@ -58,11 +60,22 @@ namespace AutoComplier.Core
 
                 foreach (CompilerError error in host.Errors)
                 {
-                    MessageBox.Show(error.ToString());
+                    //MessageBox.Show(error.ToString());
+                }
+
+                if (host.Errors == null || host.Errors.Count == 0)
+                {
+                    file = file.Replace(".tt", ".cs");
+                    using (StreamWriter writer = new StreamWriter(file))
+                    {
+                        writer.Write(output);
+                    }
                 }
             });
 
-            //*最大化，且不会自动关闭
+            resultLabel.Text = "项目构建中...";
+
+            /*最大化，且不会自动关闭
             string cmd = toolPathTextBox.Text + " " + filePathTextBox.Text + " " + parameterTextBox.Text;
             cmd += " \n pause";
             ProcessStartInfo ps = new ProcessStartInfo();
@@ -72,8 +85,11 @@ namespace AutoComplier.Core
             pause";
             Process.Start(ps);
             //*/
+
             //启动MSBuild.exe
-            //Process.Start(toolPathTextBox.Text, filePathTextBox.Text +@" " + parameterTextBox.Text);
+            Process.Start(toolPathTextBox.Text, filePathTextBox.Text +@" " + parameterTextBox.Text);
+
+            resultLabel.Text = "处理完毕";
         }
     }
 }

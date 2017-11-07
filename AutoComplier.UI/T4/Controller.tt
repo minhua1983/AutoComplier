@@ -31,6 +31,7 @@ using AutoComplier.UI.Services;
 
 namespace AutoComplier.UI.Controllers
 {
+	//生成时间：<#=DateTime.Now.ToString()#>
 <#
 tableList.ForEach(table => {
 #>
@@ -38,21 +39,22 @@ tableList.ForEach(table => {
     {
 		<#=table.Name#>Service service = new <#=table.Name#>Service();
 
+		/*
         [HttpGet]
         public List<<#=table.Name#>> Test()
         {
             return service.List();;
         }
-
-		/*
+		//*/
+		
 		[HttpGet]
-        public ApiResponse List()
+        public ApiResponse List(Page page)
         {
             ApiResponse apiResponse = new ApiResponse();
 
             try
             {
-                apiResponse.Result = service.List();
+                apiResponse.Result = service.List(page);
             }
             catch (Exception ex)
             {
@@ -62,7 +64,24 @@ tableList.ForEach(table => {
 
             return apiResponse;
         }
-		//*/
+
+		[HttpGet]
+        public ApiResponse Detail(int identity)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.Detail(identity);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
 
 		[HttpPost]
         public ApiResponse Insert(<#=table.Name#> model)
@@ -72,6 +91,42 @@ tableList.ForEach(table => {
             try
             {
                 apiResponse.Result = service.Insert(model);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+
+		[HttpPost]
+        public ApiResponse Update(<#=table.Name#> model)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.Update(model);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+
+		[HttpPost]
+        public ApiResponse Delete(int identity)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                service.Delete(identity);
             }
             catch (Exception ex)
             {

@@ -20,9 +20,10 @@ using System;
 using System.Collections.Generic;
 using AutoComplier.UI.Repositories;
 using AutoComplier.UI.Models;
-
+using AutoComplier.UI.Models.Base;
 namespace AutoComplier.UI.Services
 {
+	//生成时间：<#=DateTime.Now.ToString()#>
 <#
 tableList.ForEach(table => {
 #>
@@ -30,14 +31,29 @@ tableList.ForEach(table => {
 	{
 		<#=table.Name#>Repository repository = new <#=table.Name#>Repository();
 
-		public List<<#=table.Name#>> List()
+		public List<<#=table.Name#>> List(Page page)
 		{
 			return repository.List();
+		}
+
+		public <#=table.Name#> Detail(int identity)
+		{
+			return repository.Detail(identity);
 		}
 
 		public <#=table.Name#> Insert(<#=table.Name#> model)
 		{
 			return repository.Insert(model);
+		}
+
+		public <#=table.Name#> Update(<#=table.Name#> model)
+		{
+			return repository.Update(model);
+		}
+
+		public void Delete(int identity)
+		{
+			repository.Delete(identity);
 		}
 	}
 <#

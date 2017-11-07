@@ -11,25 +11,27 @@ using AutoComplier.UI.Services;
 
 namespace AutoComplier.UI.Controllers
 {
+	//生成时间：2017/11/7 18:18:14
     public partial class ArticleController : ApiController
     {
 		ArticleService service = new ArticleService();
 
+		/*
         [HttpGet]
         public List<Article> Test()
         {
             return service.List();;
         }
-
-		/*
+		//*/
+		
 		[HttpGet]
-        public ApiResponse List()
+        public ApiResponse List(Page page)
         {
             ApiResponse apiResponse = new ApiResponse();
 
             try
             {
-                apiResponse.Result = service.List();
+                apiResponse.Result = service.List(page);
             }
             catch (Exception ex)
             {
@@ -39,7 +41,24 @@ namespace AutoComplier.UI.Controllers
 
             return apiResponse;
         }
-		//*/
+
+		[HttpGet]
+        public ApiResponse Detail(int identity)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.Detail(identity);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
 
 		[HttpPost]
         public ApiResponse Insert(Article model)
@@ -58,26 +77,15 @@ namespace AutoComplier.UI.Controllers
 
             return apiResponse;
         }
-    }
-    public partial class SectionController : ApiController
-    {
-		SectionService service = new SectionService();
 
-        [HttpGet]
-        public List<Section> Test()
-        {
-            return service.List();;
-        }
-
-		/*
-		[HttpGet]
-        public ApiResponse List()
+		[HttpPost]
+        public ApiResponse Update(Article model)
         {
             ApiResponse apiResponse = new ApiResponse();
 
             try
             {
-                apiResponse.Result = service.List();
+                apiResponse.Result = service.Update(model);
             }
             catch (Exception ex)
             {
@@ -87,7 +95,174 @@ namespace AutoComplier.UI.Controllers
 
             return apiResponse;
         }
+
+		[HttpPost]
+        public ApiResponse Delete(int identity)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                service.Delete(identity);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+    }
+    public partial class DemoController : ApiController
+    {
+		DemoService service = new DemoService();
+
+		/*
+        [HttpGet]
+        public List<Demo> Test()
+        {
+            return service.List();;
+        }
 		//*/
+		
+		[HttpGet]
+        public ApiResponse List(Page page)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.List(page);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+
+		[HttpGet]
+        public ApiResponse Detail(int identity)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.Detail(identity);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+
+		[HttpPost]
+        public ApiResponse Insert(Demo model)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.Insert(model);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+
+		[HttpPost]
+        public ApiResponse Update(Demo model)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.Update(model);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+
+		[HttpPost]
+        public ApiResponse Delete(int identity)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                service.Delete(identity);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+    }
+    public partial class SectionController : ApiController
+    {
+		SectionService service = new SectionService();
+
+		/*
+        [HttpGet]
+        public List<Section> Test()
+        {
+            return service.List();;
+        }
+		//*/
+		
+		[HttpGet]
+        public ApiResponse List(Page page)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.List(page);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+
+		[HttpGet]
+        public ApiResponse Detail(int identity)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.Detail(identity);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
 
 		[HttpPost]
         public ApiResponse Insert(Section model)
@@ -106,26 +281,15 @@ namespace AutoComplier.UI.Controllers
 
             return apiResponse;
         }
-    }
-    public partial class UserController : ApiController
-    {
-		UserService service = new UserService();
 
-        [HttpGet]
-        public List<User> Test()
-        {
-            return service.List();;
-        }
-
-		/*
-		[HttpGet]
-        public ApiResponse List()
+		[HttpPost]
+        public ApiResponse Update(Section model)
         {
             ApiResponse apiResponse = new ApiResponse();
 
             try
             {
-                apiResponse.Result = service.List();
+                apiResponse.Result = service.Update(model);
             }
             catch (Exception ex)
             {
@@ -135,7 +299,72 @@ namespace AutoComplier.UI.Controllers
 
             return apiResponse;
         }
+
+		[HttpPost]
+        public ApiResponse Delete(int identity)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                service.Delete(identity);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+    }
+    public partial class UserController : ApiController
+    {
+		UserService service = new UserService();
+
+		/*
+        [HttpGet]
+        public List<User> Test()
+        {
+            return service.List();;
+        }
 		//*/
+		
+		[HttpGet]
+        public ApiResponse List(Page page)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.List(page);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+
+		[HttpGet]
+        public ApiResponse Detail(int identity)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.Detail(identity);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
 
 		[HttpPost]
         public ApiResponse Insert(User model)
@@ -145,6 +374,42 @@ namespace AutoComplier.UI.Controllers
             try
             {
                 apiResponse.Result = service.Insert(model);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+
+		[HttpPost]
+        public ApiResponse Update(User model)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.Update(model);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+
+		[HttpPost]
+        public ApiResponse Delete(int identity)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                service.Delete(identity);
             }
             catch (Exception ex)
             {
