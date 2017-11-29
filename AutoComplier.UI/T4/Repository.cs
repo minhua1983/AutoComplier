@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +10,7 @@ using AutoComplier.UI.Models;
 
 namespace AutoComplier.UI.Repositories
 {
-	//生成时间：2017/11/7 18:18:15
+	//生成时间：2017/11/8 20:32:44
 	public partial class ArticleRepository
 	{
 		string connectionString = ConfigurationManager.AppSettings["demo"];
@@ -179,6 +179,63 @@ namespace AutoComplier.UI.Repositories
 			using(IDbConnection conn = new SqlConnection(connectionString))
 			{
 				conn.Execute("DELETE FROM [Section] WHERE [Id] = @Id", new { Id = identity });
+			}
+		}
+	}
+	public partial class TrailerRepository
+	{
+		string connectionString = ConfigurationManager.AppSettings["demo"];
+
+		public List<Trailer> List()
+		{
+			List<Trailer> result;
+			using(IDbConnection conn = new SqlConnection(connectionString))
+			{
+				result = conn.Query<Trailer>("SELECT * FROM [Trailer]").AsList();
+			}
+			return result;
+		}
+
+		public Trailer Detail(int identity)
+		{
+			Trailer result;
+			using(IDbConnection conn = new SqlConnection(connectionString))
+			{
+				result = conn.Query<Trailer>("SELECT * FROM [Trailer] WHERE [id] = @id",new { id = identity }).FirstOrDefault();
+			}
+			return result;
+		}
+
+		public Trailer Insert(Trailer model)
+		{
+			
+			Trailer result;
+			using(IDbConnection conn = new SqlConnection(connectionString))
+			{
+				object identityColumn = conn.ExecuteScalar("INSERT INTO [Trailer]([title],[create_time],[is_deleted]) VALUES(@title,@create_time,@is_deleted);SELECT SCOPE_IDENTITY();", model);
+				int identity = int.Parse(identityColumn.ToString());
+				result = Detail(identity);
+			}
+			return result;
+		}
+
+		public Trailer Update(Trailer model)
+		{
+			
+			Trailer result;
+			using(IDbConnection conn = new SqlConnection(connectionString))
+			{
+				conn.Execute("UPDATE [Trailer] SET [title] = ISNULL(@title,[title]),[create_time] = ISNULL(@create_time,[create_time]),[is_deleted] = ISNULL(@is_deleted,[is_deleted]) WHERE [id] = @id", model);
+				result = Detail(model.id.Value);
+			}
+			return result;
+		}
+
+		public void Delete(int identity)
+		{
+			using(IDbConnection conn = new SqlConnection(connectionString))
+			{
+				conn.Execute("DELETE FROM [Trailer] WHERE [id] = @id", new { id = identity });
 			}
 		}
 	}

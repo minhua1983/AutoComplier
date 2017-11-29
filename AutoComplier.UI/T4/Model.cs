@@ -1,9 +1,9 @@
-﻿
+
 using System;
 
 namespace AutoComplier.UI.Models
 {
-	//生成时间：2017/11/7 18:18:14
+	//生成时间：2017/11/8 20:32:40
 	public class Article
 	{
 		public Nullable<Int32> Id{ get;set; }
@@ -26,6 +26,13 @@ namespace AutoComplier.UI.Models
 		public Nullable<Int32> Id{ get;set; }
 		public String Title{ get;set; }
 		public Nullable<DateTime> CreateDate{ get;set; }
+	}
+	public class Trailer
+	{
+		public Nullable<Int32> id{ get;set; }
+		public String title{ get;set; }
+		public Nullable<DateTime> create_time{ get;set; }
+		public Nullable<Boolean> is_deleted{ get;set; }
 	}
 	public class User
 	{

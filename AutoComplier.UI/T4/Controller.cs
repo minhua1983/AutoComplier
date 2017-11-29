@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ using AutoComplier.UI.Services;
 
 namespace AutoComplier.UI.Controllers
 {
-	//生成时间：2017/11/7 18:18:14
+	//生成时间：2017/11/8 20:32:49
     public partial class ArticleController : ApiController
     {
 		ArticleService service = new ArticleService();
@@ -284,6 +284,108 @@ namespace AutoComplier.UI.Controllers
 
 		[HttpPost]
         public ApiResponse Update(Section model)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.Update(model);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+
+		[HttpPost]
+        public ApiResponse Delete(int identity)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                service.Delete(identity);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+    }
+    public partial class TrailerController : ApiController
+    {
+		TrailerService service = new TrailerService();
+
+		/*
+        [HttpGet]
+        public List<Trailer> Test()
+        {
+            return service.List();;
+        }
+		//*/
+		
+		[HttpGet]
+        public ApiResponse List(Page page)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.List(page);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+
+		[HttpGet]
+        public ApiResponse Detail(int identity)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.Detail(identity);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+
+		[HttpPost]
+        public ApiResponse Insert(Trailer model)
+        {
+            ApiResponse apiResponse = new ApiResponse();
+
+            try
+            {
+                apiResponse.Result = service.Insert(model);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Code = 1;
+                apiResponse.Message = ex.Message;
+            }
+
+            return apiResponse;
+        }
+
+		[HttpPost]
+        public ApiResponse Update(Trailer model)
         {
             ApiResponse apiResponse = new ApiResponse();
 

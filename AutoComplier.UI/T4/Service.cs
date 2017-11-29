@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using AutoComplier.UI.Repositories;
@@ -6,7 +6,7 @@ using AutoComplier.UI.Models;
 using AutoComplier.UI.Models.Base;
 namespace AutoComplier.UI.Services
 {
-	//生成时间：2017/11/7 18:18:15
+	//生成时间：2017/11/8 20:32:47
 	public partial class ArticleService
 	{
 		ArticleRepository repository = new ArticleRepository();
@@ -85,6 +85,35 @@ namespace AutoComplier.UI.Services
 		}
 
 		public Section Update(Section model)
+		{
+			return repository.Update(model);
+		}
+
+		public void Delete(int identity)
+		{
+			repository.Delete(identity);
+		}
+	}
+	public partial class TrailerService
+	{
+		TrailerRepository repository = new TrailerRepository();
+
+		public List<Trailer> List(Page page)
+		{
+			return repository.List();
+		}
+
+		public Trailer Detail(int identity)
+		{
+			return repository.Detail(identity);
+		}
+
+		public Trailer Insert(Trailer model)
+		{
+			return repository.Insert(model);
+		}
+
+		public Trailer Update(Trailer model)
 		{
 			return repository.Update(model);
 		}
