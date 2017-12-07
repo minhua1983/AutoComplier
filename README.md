@@ -11,3 +11,6 @@
 * AutoComplier.Core，winform主程序
 * AutoComplier.XCore，控制台主程序
 * AutoComplier.UI，需要生成的网站
+
+## MSBuild官方文档
+[MSBuild官方文档](https://msdn.microsoft.com/zh-cn/library/0k6kkbsd.aspx)
