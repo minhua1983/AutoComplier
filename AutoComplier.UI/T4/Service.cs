@@ -1,4 +1,5 @@
 
+
 using System;
 using System.Collections.Generic;
 using AutoComplier.UI.Repositories;
@@ -6,7 +7,7 @@ using AutoComplier.UI.Models;
 using AutoComplier.UI.Models.Base;
 namespace AutoComplier.UI.Services
 {
-	//生成时间：2017/11/8 20:32:47
+	//生成时间：2017/12/8 15:27:52
 	public partial class ArticleService
 	{
 		ArticleRepository repository = new ArticleRepository();
@@ -27,6 +28,35 @@ namespace AutoComplier.UI.Services
 		}
 
 		public Article Update(Article model)
+		{
+			return repository.Update(model);
+		}
+
+		public void Delete(int identity)
+		{
+			repository.Delete(identity);
+		}
+	}
+	public partial class Class1Service
+	{
+		Class1Repository repository = new Class1Repository();
+
+		public List<Class1> List(Page page)
+		{
+			return repository.List();
+		}
+
+		public Class1 Detail(int identity)
+		{
+			return repository.Detail(identity);
+		}
+
+		public Class1 Insert(Class1 model)
+		{
+			return repository.Insert(model);
+		}
+
+		public Class1 Update(Class1 model)
 		{
 			return repository.Update(model);
 		}

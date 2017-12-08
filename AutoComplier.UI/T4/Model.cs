@@ -3,7 +3,7 @@ using System;
 
 namespace AutoComplier.UI.Models
 {
-	//生成时间：2017/11/8 20:32:40
+	//生成时间：2017/12/8 15:27:45
 	public class Article
 	{
 		public Nullable<Int32> Id{ get;set; }
@@ -13,6 +13,12 @@ namespace AutoComplier.UI.Models
 		public Nullable<Int32> Amount{ get;set; }
 		public Nullable<Single> Cost{ get;set; }
 		public Nullable<Int32> IsDeleted{ get;set; }
+	}
+	public class Class1
+	{
+		public Nullable<Int32> id{ get;set; }
+		public String title{ get;set; }
+		public String desc{ get;set; }
 	}
 	public class Demo
 	{

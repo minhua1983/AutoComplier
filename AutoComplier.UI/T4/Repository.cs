@@ -10,7 +10,7 @@ using AutoComplier.UI.Models;
 
 namespace AutoComplier.UI.Repositories
 {
-	//生成时间：2017/11/8 20:32:44
+	//生成时间：2017/12/8 15:27:48
 	public partial class ArticleRepository
 	{
 		string connectionString = ConfigurationManager.AppSettings["demo"];
@@ -65,6 +65,63 @@ namespace AutoComplier.UI.Repositories
 			using(IDbConnection conn = new SqlConnection(connectionString))
 			{
 				conn.Execute("DELETE FROM [Article] WHERE [Id] = @Id", new { Id = identity });
+			}
+		}
+	}
+	public partial class Class1Repository
+	{
+		string connectionString = ConfigurationManager.AppSettings["demo"];
+
+		public List<Class1> List()
+		{
+			List<Class1> result;
+			using(IDbConnection conn = new SqlConnection(connectionString))
+			{
+				result = conn.Query<Class1>("SELECT * FROM [Class1]").AsList();
+			}
+			return result;
+		}
+
+		public Class1 Detail(int identity)
+		{
+			Class1 result;
+			using(IDbConnection conn = new SqlConnection(connectionString))
+			{
+				result = conn.Query<Class1>("SELECT * FROM [Class1] WHERE [id] = @id",new { id = identity }).FirstOrDefault();
+			}
+			return result;
+		}
+
+		public Class1 Insert(Class1 model)
+		{
+			
+			Class1 result;
+			using(IDbConnection conn = new SqlConnection(connectionString))
+			{
+				object identityColumn = conn.ExecuteScalar("INSERT INTO [Class1]([title],[desc]) VALUES(@title,@desc);SELECT SCOPE_IDENTITY();", model);
+				int identity = int.Parse(identityColumn.ToString());
+				result = Detail(identity);
+			}
+			return result;
+		}
+
+		public Class1 Update(Class1 model)
+		{
+			
+			Class1 result;
+			using(IDbConnection conn = new SqlConnection(connectionString))
+			{
+				conn.Execute("UPDATE [Class1] SET [title] = ISNULL(@title,[title]),[desc] = ISNULL(@desc,[desc]) WHERE [id] = @id", model);
+				result = Detail(model.id.Value);
+			}
+			return result;
+		}
+
+		public void Delete(int identity)
+		{
+			using(IDbConnection conn = new SqlConnection(connectionString))
+			{
+				conn.Execute("DELETE FROM [Class1] WHERE [id] = @id", new { id = identity });
 			}
 		}
 	}

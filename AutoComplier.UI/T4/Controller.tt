@@ -1,15 +1,16 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ Assembly name="D:\minhua\workspace\AutoComplier\AutoComplier.UICore\bin\AutoComplier.UICore.dll" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Web" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="AutoComplier.UI" #>
-<#@ import namespace="AutoComplier.UI.Models.Base" #>
-<#@ import namespace="AutoComplier.UI.Common" #>
+<#@ import namespace="AutoComplier.UICore" #>
+<#@ import namespace="AutoComplier.UICore.Models.Base" #>
+<#@ import namespace="AutoComplier.UICore.Common" #>
 <#@ output extension=".cs" #>
 
-<#@ Assembly name="D:\minhua\workspace\AutoComplier\AutoComplier.UI\bin\AutoComplier.UI.dll" #>
+
 <# 
 //Assembly name="$(projectDir)\bin\AutoComplier.UI.dll"
 List<Table> tableList = TableHelper.List(new Server{

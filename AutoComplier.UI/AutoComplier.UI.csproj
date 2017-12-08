@@ -157,6 +157,15 @@
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="T4\Common.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Common.txt</LastGenOutput>
+    </Content>
+    <Content Include="T4\Common.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common.tt</DependentUpon>
+    </Content>
     <Content Include="T4\Controller.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Controller.cs</LastGenOutput>
@@ -179,24 +188,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Common\ColumnHelper.cs" />
-    <Compile Include="Controllers\ColumnController.cs" />
-    <Compile Include="Controllers\DatabaseController.cs" />
-    <Compile Include="Controllers\ServerController.cs" />
-    <Compile Include="Controllers\TableController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Base\ApiResponse.cs" />
-    <Compile Include="Models\Base\Column.cs" />
-    <Compile Include="Models\Base\Database.cs" />
     <Compile Include="Models\Base\Page.cs" />
-    <Compile Include="Models\Base\Server.cs" />
-    <Compile Include="Models\Base\Table.cs" />
-    <Compile Include="Models\Request\ColumnListRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Common\TableHelper.cs" />
     <Compile Include="T4\Controller.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -234,10 +231,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
     <Folder Include="Views\Test1\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AutoComplier.UICore\AutoComplier.UICore.csproj">
+      <Project>{c10347a3-b85b-48fa-9b69-9d104afad2e1}</Project>
+      <Name>AutoComplier.UICore</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
