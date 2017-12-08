@@ -157,15 +157,6 @@
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
-    <Content Include="T4\Common.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Common.txt</LastGenOutput>
-    </Content>
-    <Content Include="T4\Common.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Common.tt</DependentUpon>
-    </Content>
     <Content Include="T4\Controller.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Controller.cs</LastGenOutput>
