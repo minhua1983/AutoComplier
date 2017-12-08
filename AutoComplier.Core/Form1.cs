@@ -38,12 +38,15 @@ namespace AutoComplier.Core
         {
             resultLabel.Text = "代码生成中...";
 
+            string AutoCompilerPath = @"D:\minhua\workspace\AutoComplier\AutoComplier.UI\T4\";
+
+
             string[] files = new string[] {
                 //@"D:\minhua\workspace\AutoComplier\AutoComplier.UI\T4\Test.tt",
-                @"D:\minhua\workspace\AutoComplier\AutoComplier.UI\T4\Model.tt",
-                @"D:\minhua\workspace\AutoComplier\AutoComplier.UI\T4\Repository.tt",
-                @"D:\minhua\workspace\AutoComplier\AutoComplier.UI\T4\Service.tt",
-                @"D:\minhua\workspace\AutoComplier\AutoComplier.UI\T4\Controller.tt"
+                AutoCompilerPath + @"Model.tt",
+                AutoCompilerPath + @"Repository.tt",
+                AutoCompilerPath + @"Service.tt",
+                AutoCompilerPath + @"Controller.tt"
             };
 
             //MessageBox.Show(System.Environment.CurrentDirectory);

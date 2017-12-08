@@ -1,4 +1,4 @@
-﻿
+
 
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using AutoComplier.UI.Services;
 
 namespace AutoComplier.UI.Controllers
 {
-	//生成时间：2017/12/8 15:32:22
+	//生成时间：2017/12/8 16:11:54
     public partial class ArticleController : ApiController
     {
 		ArticleService service = new ArticleService();

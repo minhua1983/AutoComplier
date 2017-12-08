@@ -230,7 +230,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AutoComplier.UICore\AutoComplier.UICore.csproj">
-      <Project>{c10347a3-b85b-48fa-9b69-9d104afad2e1}</Project>
+      <Project>{672d0f64-8623-457c-bf85-916465f22e91}</Project>
       <Name>AutoComplier.UICore</Name>
     </ProjectReference>
   </ItemGroup>

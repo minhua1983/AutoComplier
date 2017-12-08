@@ -1,5 +1,5 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
-<#@ Assembly name="D:\minhua\workspace\AutoComplier\AutoComplier.UICore\bin\AutoComplier.UICore.dll" #>
+<#@ Assembly name="D:\minhua\workspace\AutoComplier\AutoComplier.UICore\bin\release\AutoComplier.UICore.dll" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>

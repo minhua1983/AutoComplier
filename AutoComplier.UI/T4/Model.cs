@@ -3,7 +3,7 @@ using System;
 
 namespace AutoComplier.UI.Models
 {
-	//生成时间：2017/12/8 15:27:45
+	//生成时间：2017/12/8 16:11:44
 	public class Article
 	{
 		public Nullable<Int32> Id{ get;set; }

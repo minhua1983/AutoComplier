@@ -7,7 +7,7 @@ using AutoComplier.UI.Models;
 using AutoComplier.UI.Models.Base;
 namespace AutoComplier.UI.Services
 {
-	//生成时间：2017/12/8 15:27:52
+	//生成时间：2017/12/8 16:11:51
 	public partial class ArticleService
 	{
 		ArticleRepository repository = new ArticleRepository();

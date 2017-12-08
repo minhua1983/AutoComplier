@@ -10,7 +10,7 @@ using AutoComplier.UI.Models;
 
 namespace AutoComplier.UI.Repositories
 {
-	//生成时间：2017/12/8 15:27:48
+	//生成时间：2017/12/8 16:11:47
 	public partial class ArticleRepository
 	{
 		string connectionString = ConfigurationManager.AppSettings["demo"];
